@@ -10,7 +10,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 # Set up Chrome options
 options = Options()
 options.add_experimental_option("detach", True)
-
+ 
 # Set up WebDriver
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
