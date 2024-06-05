@@ -6,6 +6,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.action_chains import ActionChains
+import time
+from datetime import date
 
 # Set up Chrome options
 options = Options()
@@ -55,28 +57,43 @@ try:
     except:
         print("No popup")
 
+    '''
     # Selecting the Courses
-    #wait = WebDriverWait(driver, 10)
+    wait = WebDriverWait(driver, 10)
 
+    # Locate the element by its ID
+    courses = driver.find_element(By.ID, 'mat-select-value-3')
+
+    # Initialize ActionChains
     actions = ActionChains(driver)
 
-    trigger_element = WebDriverWait(driver, 10).until(
-    EC.visibility_of_element_located((By.CSS_SELECTOR, 'span.courses-selection'))
-    )
+    # Move to the element, click it, and keep the mouse hovering over it
+    actions.move_to_element(courses).click().perform()
 
-    # Hover over the trigger element
-    actions.move_to_element(trigger_element).perform()
+    # Add a short delay to ensure the dropdown is ready
+    time.sleep(1)  # Adjust the sleep time as needed
 
-    # Assuming you now need to click an option from the now-visible dropdown, locate that option
-    # For example, clicking the first option in the dropdown
-    dropdown_option = WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located((By.CSS_SELECTOR, 'your_dropdown_option_css_selector'))
-    )
-
-    # Click the option
-    actions.move_to_element(dropdown_option).click().perform()
-
+    # Keep the mouse hovering over the element
+    actions.move_to_element(courses).perform()
     
+    # Deselect all courses
+    wait = WebDriverWait(driver, 10)
+
+    # Wait until the element is visible and locate it by its text content
+    select_all_button = wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='Select All']")))
+
+    # Click the element
+    select_all_button.click()
+    '''
+
+    # Get today's date
+    today = date.today()
+
+    # Get the numerical day of the month
+    today_day = today.day
+
+    print(today_day)
+
 
 except Exception as e:
     print(f"An error occurred: {e}")
