@@ -39,7 +39,7 @@ try:
     password_field = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.ID, "mat-input-1"))  # Adjust the ID if needed
     )
-    password_field.send_keys("Golf12345*")
+    password_field.send_keys("")
 
     # Locate the "SIGN IN" button and click it
     sign_in_button = WebDriverWait(driver, 10).until(
